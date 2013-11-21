@@ -1,11 +1,12 @@
 QT       += core
 
 TARGET = qt5-plugin-generic-emukeys
-TEMPLATE = lib
-CONFIG += plugin
 
-#DESTDIR = $$[QT_INSTALL_PLUGINS]/codecs
-DESTDIR = ../build
+PLUGIN_TYPE = generic
+PLUGIN_CLASS_NAME = EmuKeysPlugin
+load(qt_plugin)
+
+DESTDIR = ../build/generic
 
 SOURCES += emukeysplugin.cpp \
     emukeyshandler.cpp
