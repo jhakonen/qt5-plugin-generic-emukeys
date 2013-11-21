@@ -19,3 +19,7 @@ HEADERS += \
 
 RESOURCES += \
     resources.qrc
+
+OTHER_FILES += \
+    main.qml \
+    ButtonIndicator.qml

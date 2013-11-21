@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>qml/plugin-runner/ButtonIndicator.qml</file>
-        <file>qml/plugin-runner/main.qml</file>
+        <file>ButtonIndicator.qml</file>
+        <file>main.qml</file>
     </qresource>
 </RCC>

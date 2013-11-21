@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
     QQuickView viewer;
 
     viewer.rootContext()->setContextProperty("keySource", &keySource);
-    viewer.setSource(QUrl("qrc:/qml/plugin-runner/main.qml"));
+    viewer.setSource(QUrl("qrc:/main.qml"));
     viewer.show();
 
     return app.exec();
