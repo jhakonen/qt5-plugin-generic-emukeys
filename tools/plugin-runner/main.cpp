@@ -1,10 +1,11 @@
 #include <QtGui/QGuiApplication>
+#include <QQuickView>
 #include <QQuickItem>
 #include <QTimer>
 #include <QKeyEvent>
 #include <QQmlContext>
+#include <QUrl>
 
-#include "qtquick2applicationviewer.h"
 #include "keysource.h"
 
 QEvent::Type getRandomKeyState() {
@@ -36,11 +37,11 @@ void sendFakeKeyEvents() {
 int main(int argc, char *argv[]) {
     QGuiApplication app(argc, argv);
     KeySource keySource(&app);
-    QtQuick2ApplicationViewer viewer;
+    QQuickView viewer;
 
     viewer.rootContext()->setContextProperty("keySource", &keySource);
-    viewer.setMainQmlFile(QStringLiteral("qml/plugin-runner/main.qml"));
-    viewer.showExpanded();
+    viewer.setSource(QUrl("qrc:/qml/plugin-runner/main.qml"));
+    viewer.show();
 
     sendFakeKeyEvents();
 
