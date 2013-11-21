@@ -11,6 +11,7 @@ int main(int argc, char *argv[]) {
     KeySource keySource(&app);
     QQuickView viewer;
 
+    viewer.setResizeMode(QQuickView::SizeRootObjectToView);
     viewer.rootContext()->setContextProperty("keySource", &keySource);
     viewer.setSource(QUrl("qrc:/main.qml"));
     viewer.show();
