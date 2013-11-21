@@ -1,4 +1,4 @@
-QT       += core
+QT       += core gui-private
 
 TARGET = qt5-plugin-generic-emukeys
 
