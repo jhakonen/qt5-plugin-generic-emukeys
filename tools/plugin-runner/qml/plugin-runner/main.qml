@@ -18,23 +18,37 @@ Rectangle {
         }
 
         ButtonIndicator {
-            objectName: "power"
+            id: powerOff
             text: qsTr("Power Off")
             Layout.alignment: Qt.AlignCenter
         }
 
         ButtonIndicator {
-            objectName: "volumeDown"
+            id: volumeDown
             text: qsTr("Volume Down")
             Layout.alignment: Qt.AlignCenter
-            isPressed: true
         }
 
         ButtonIndicator {
-            objectName: "volumeUp"
+            id: volumeUp
             text: qsTr("Volume Up")
             Layout.alignment: Qt.AlignCenter
         }
 
+        Connections {
+            target: keySource
+            onPowerKeyReceived: {
+                powerOff.flash()
+                powerOff.isPressed = pressed
+            }
+            onVolumeDownKeyReceived: {
+                volumeDown.flash()
+                volumeDown.isPressed = pressed
+            }
+            onVolumeUpKeyReceived: {
+                volumeUp.flash()
+                volumeUp.isPressed = pressed
+            }
+        }
     }
 }

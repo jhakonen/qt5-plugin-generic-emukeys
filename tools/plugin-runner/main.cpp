@@ -2,6 +2,8 @@
 #include <QQuickItem>
 #include <QTimer>
 #include <QKeyEvent>
+#include <QQmlContext>
+
 #include "qtquick2applicationviewer.h"
 #include "keysource.h"
 
@@ -18,46 +20,29 @@ int getRandomKey() {
     case 2:
         return Qt::Key_PowerOff;
     }
+    return 0;
 }
 
-int main(int argc, char *argv[])
-{
-    QGuiApplication app(argc, argv);
+void sendFakeKeyEvents() {
+    auto fooTimer = new QTimer;
+    QObject::connect(fooTimer, &QTimer::timeout, []() {
+        QCoreApplication::sendEvent(QCoreApplication::instance(),
+            new QKeyEvent(getRandomKeyState(), getRandomKey(), Qt::NoModifier));
+    });
+    fooTimer->setInterval(1000);
+    fooTimer->start();
+}
 
+int main(int argc, char *argv[]) {
+    QGuiApplication app(argc, argv);
+    KeySource keySource(&app);
     QtQuick2ApplicationViewer viewer;
+
+    viewer.rootContext()->setContextProperty("keySource", &keySource);
     viewer.setMainQmlFile(QStringLiteral("qml/plugin-runner/main.qml"));
     viewer.showExpanded();
 
-    KeySource keySource(&app);
-
-    auto getObjectByName = [&](const QString &name)->QObject* {
-        return viewer.rootObject()->findChild<QObject*>(name);
-    };
-
-    auto power = getObjectByName("power");
-    auto volumeDown = getObjectByName("volumeDown");
-    auto volumeUp = getObjectByName("volumeUp");
-
-    power->connect(&keySource, &KeySource::powerKeyReceived, [&](bool pressed) {
-        QMetaObject::invokeMethod(power, "flash");
-        power->setProperty("isPressed", pressed);
-    });
-    volumeDown->connect(&keySource, &KeySource::volumeDownKeyReceived, [&](bool pressed) {
-        QMetaObject::invokeMethod(volumeDown, "flash");
-        volumeDown->setProperty("isPressed", pressed);
-    });
-    volumeUp->connect(&keySource, &KeySource::volumeUpKeyReceived, [&](bool pressed) {
-        QMetaObject::invokeMethod(volumeUp, "flash");
-        volumeUp->setProperty("isPressed", pressed);
-    });
-
-    // fakey sending of events
-    QTimer fooTimer;
-    QObject::connect(&fooTimer, &QTimer::timeout, [&]() {
-        QGuiApplication::sendEvent(&app, new QKeyEvent(getRandomKeyState(), getRandomKey(), Qt::NoModifier));
-    });
-    fooTimer.setInterval(1000);
-    fooTimer.start();
+    sendFakeKeyEvents();
 
     return app.exec();
 }
