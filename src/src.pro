@@ -1,6 +1,6 @@
 QT       += core gui-private
 
-TARGET = qt5-plugin-generic-emukeys
+TARGET = emukeysplugin
 
 PLUGIN_TYPE = generic
 PLUGIN_CLASS_NAME = EmuKeysPlugin
@@ -15,7 +15,4 @@ HEADERS += emukeysplugin.h \
     emukeyshandler.h
 OTHER_FILES += emukeys.json
 
-unix {
-    target.path = /usr/lib
-    INSTALLS += target
-}
+*-g++*:QMAKE_CXXFLAGS += -std=c++0x

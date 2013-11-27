@@ -23,3 +23,5 @@ OTHER_FILES += \
 
 HEADERS += \
     keysender.h
+
+*-g++*:QMAKE_CXXFLAGS += -std=c++0x

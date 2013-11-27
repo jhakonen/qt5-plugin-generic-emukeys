@@ -23,3 +23,5 @@ RESOURCES += \
 OTHER_FILES += \
     main.qml \
     ButtonIndicator.qml
+
+*-g++*:QMAKE_CXXFLAGS += -std=c++0x
