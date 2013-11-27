@@ -1,0 +1,19 @@
+Name: qt5-plugin-generic-emukeys
+Summary: Generic Qt5 plugin for emulating hardware keys
+Version: 0.0.0
+Release: 1
+Group: System/Packages
+License: LGPLv2
+Sources:
+- '%{name}-%{version}.tar.bz2'
+Description:
+  Receives volume up/down and poer off key events over network from remcon and
+  passes them to lipstick. Lipstick loads this plugin in emulator.
+URL: https://github.com/jhakonen/qt5-plugin-generic-emukeys
+Builder: qmake5
+PkgConfigBR:
+- Qt5Core
+- Qt5Gui
+
+Files:
+- "%{_libdir}/qt5/plugins/generic/libemukeysplugin.so"
