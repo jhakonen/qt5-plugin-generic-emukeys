@@ -12,4 +12,12 @@
 *.la
 *.a
 
+# build artifacts
 *.user
+Makefile
+*.spec
+*.rpm
+documentation.list
+build
+moc_*
+qrc_*
