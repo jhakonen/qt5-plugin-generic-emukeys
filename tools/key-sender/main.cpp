@@ -10,6 +10,7 @@ int main(int argc, char *argv[]) {
     QGuiApplication app(argc, argv);
     QQuickView viewer;
     KeySender keySender;
+    keySender.connectToHost();
 
     viewer.setResizeMode(QQuickView::SizeRootObjectToView);
     viewer.rootContext()->setContextProperty("keySender", &keySender);

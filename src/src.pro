@@ -1,4 +1,4 @@
-QT       += core gui-private
+QT       += core gui-private network
 
 TARGET = emukeysplugin
 
